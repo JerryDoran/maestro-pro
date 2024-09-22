@@ -1,43 +1,43 @@
-import { cn } from "@/lib/utils";
-import Marquee from "@/components/magicui/marquee";
-import SectionHeading from "../global/SectionHeading";
+import { cn } from '@/lib/utils';
+import Marquee from '@/components/magicui/marquee';
+import SectionHeading from '../global/section-heading';
 
 const reviews = [
   {
-    name: "Jack",
-    username: "@jack",
+    name: 'Jack',
+    username: '@jack',
     body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
+    img: 'https://avatar.vercel.sh/jack',
   },
   {
-    name: "Jill",
-    username: "@jill",
+    name: 'Jill',
+    username: '@jill',
     body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
+    img: 'https://avatar.vercel.sh/jill',
   },
   {
-    name: "John",
-    username: "@john",
+    name: 'John',
+    username: '@john',
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
+    img: 'https://avatar.vercel.sh/john',
   },
   {
-    name: "Jane",
-    username: "@jane",
+    name: 'Jane',
+    username: '@jane',
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
+    img: 'https://avatar.vercel.sh/jane',
   },
   {
-    name: "Jenny",
-    username: "@jenny",
+    name: 'Jenny',
+    username: '@jenny',
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
+    img: 'https://avatar.vercel.sh/jenny',
   },
   {
-    name: "James",
-    username: "@james",
+    name: 'James',
+    username: '@james',
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    img: 'https://avatar.vercel.sh/james',
   },
 ];
 
@@ -58,47 +58,47 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+        'relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4',
         // light styles
-        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+        'border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]',
         // dark styles
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+        'dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]'
       )}
     >
-      <div className="flex flex-row items-center gap-2">
-        <img className="rounded-full" width="32" height="32" alt="" src={img} />
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
+      <div className='flex flex-row items-center gap-2'>
+        <img className='rounded-full' width='32' height='32' alt='' src={img} />
+        <div className='flex flex-col'>
+          <figcaption className='text-sm font-medium dark:text-white'>
             {name}
           </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{username}</p>
+          <p className='text-xs font-medium dark:text-white/40'>{username}</p>
         </div>
       </div>
-      <blockquote className="mt-2 text-sm">{body}</blockquote>
+      <blockquote className='mt-2 text-sm'>{body}</blockquote>
     </figure>
   );
 };
 
 export function CustomerReviews() {
   return (
-    <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-      <div className="pb-6">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-slate-900 dark:text-slate-200">
+    <div className='relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl'>
+      <div className='pb-6'>
+        <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-slate-900 dark:text-slate-200'>
           What are Our Customers Saying
         </h1>
       </div>
-      <Marquee pauseOnHover className="[--duration:20s]">
+      <Marquee pauseOnHover className='[--duration:20s]'>
         {firstRow.map((review) => (
           <ReviewCard key={review.username} {...review} />
         ))}
       </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:20s]">
+      <Marquee reverse pauseOnHover className='[--duration:20s]'>
         {secondRow.map((review) => (
           <ReviewCard key={review.username} {...review} />
         ))}
       </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
+      <div className='pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background'></div>
+      <div className='pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background'></div>
     </div>
   );
 }

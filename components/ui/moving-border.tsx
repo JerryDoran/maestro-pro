@@ -1,25 +1,16 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 import {
   motion,
   useAnimationFrame,
   useMotionTemplate,
   useMotionValue,
   useTransform,
-} from "framer-motion";
-import { useRef } from "react";
-import { cn } from "@/lib/utils";
+} from 'framer-motion';
+import { useRef } from 'react';
+import { cn } from '@/lib/utils';
 
-export function Button({
-  borderRadius = "1.75rem",
-  children,
-  as: Component = "button",
-  containerClassName,
-  borderClassName,
-  duration,
-  className,
-  ...otherProps
-}: {
+type ButtonProps = {
   borderRadius?: string;
   children: React.ReactNode;
   as?: any;
@@ -28,11 +19,22 @@ export function Button({
   duration?: number;
   className?: string;
   [key: string]: any;
-}) {
+};
+
+export function Button({
+  borderRadius = '1.75rem',
+  children,
+  as: Component = 'button',
+  containerClassName,
+  borderClassName,
+  duration,
+  className,
+  ...otherProps
+}: ButtonProps) {
   return (
     <Component
       className={cn(
-        "bg-transparent relative text-xl h-12 w-52 p-[1px] overflow-hidden ",
+        'bg-transparent relative text-xl h-12 w-fit p-[1px] overflow-hidden ',
         containerClassName
       )}
       style={{
@@ -41,13 +43,13 @@ export function Button({
       {...otherProps}
     >
       <div
-        className="absolute inset-0"
+        className='absolute inset-0'
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
       >
-        <MovingBorder duration={duration} rx="30%" ry="30%">
+        <MovingBorder duration={duration} rx='30%' ry='30%'>
           <div
             className={cn(
-              "h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]",
+              'h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]',
               borderClassName
             )}
           />
@@ -56,7 +58,7 @@ export function Button({
 
       <div
         className={cn(
-          "relative bg-slate-900/[0.8] border border-slate-800 backdrop-blur-xl text-white flex items-center justify-center w-full h-full text-sm antialiased",
+          'relative bg-slate-900/[0.8] border border-slate-800 backdrop-blur-xl text-white flex items-center justify-center w-full h-full text-sm antialiased',
           className
         )}
         style={{
@@ -107,17 +109,17 @@ export const MovingBorder = ({
   return (
     <>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        className="absolute h-full w-full"
-        width="100%"
-        height="100%"
+        xmlns='http://www.w3.org/2000/svg'
+        preserveAspectRatio='none'
+        className='absolute h-full w-full'
+        width='100%'
+        height='100%'
         {...otherProps}
       >
         <rect
-          fill="none"
-          width="100%"
-          height="100%"
+          fill='none'
+          width='100%'
+          height='100%'
           rx={rx}
           ry={ry}
           ref={pathRef}
@@ -125,10 +127,10 @@ export const MovingBorder = ({
       </svg>
       <motion.div
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          display: "inline-block",
+          display: 'inline-block',
           transform,
         }}
       >
