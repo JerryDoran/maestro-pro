@@ -1,6 +1,6 @@
-import { AirVent } from 'lucide-react';
+import { FolderKanban } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+
 type LogoProps = {
   title?: string;
   href: string;
@@ -18,7 +18,7 @@ export default function Logo({ title, href, labelShown = true }: LogoProps) {
         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
         className="h-8 w-auto"
       /> */}
-      <AirVent className='h-8 w-8 text-indigo-600' />
+      <FolderKanban className='h-8 w-8 text-indigo-600' />
       <span className='font-bold text-xl'>{title}</span>
     </Link>
   );
