@@ -1,7 +1,7 @@
-import CategoryForm from '@/components/forms/CategoryForm';
+import CategoryForm from '@/components/forms/category-form';
 import React from 'react';
 
-export default function page() {
+export default function NewCategory() {
   return (
     <div className='p-8'>
       <CategoryForm />

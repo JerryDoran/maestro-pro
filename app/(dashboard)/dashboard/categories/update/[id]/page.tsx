@@ -1,8 +1,9 @@
 import { getCategoryById } from '@/actions/categories';
-import CategoryForm from '@/components/forms/CategoryForm';
+import CategoryForm from '@/components/forms/category-form';
+
 import React from 'react';
 
-export default async function page({
+export default async function UpdateCategory({
   params: { id },
 }: {
   params: { id: string };
