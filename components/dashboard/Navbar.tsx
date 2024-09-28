@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Bell,
-  CircleUser,
   Home,
   LineChart,
   Menu,
@@ -22,21 +20,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+
 import { Session } from 'next-auth';
-import { getInitials } from '@/lib/generateInitials';
+
 import { ModeToggle } from '@/components/mode-toggle';
-import { AvatarMenuButton } from './AvatarMenuButton';
+import { AvatarMenuButton } from './avatar-menu-button';
+
 export default function Navbar({ session }: { session: Session }) {
   return (
     <header className='flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6'>

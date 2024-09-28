@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+
 import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -19,8 +19,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/lib/generateInitials';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import Logo from '@/components/global/logo';
+
 import AuthenticatedAvatar from '@/components/global/AuthenticatedAvatar';
+import Logo from '../global/logo';
 
 export default function SiteHeader({ session }: { session: Session | null }) {
   const navigation = [
