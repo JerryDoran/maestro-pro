@@ -1,9 +1,9 @@
-import CategoryForm from "@/components/Forms/CategoryForm";
-import React from "react";
+import CategoryForm from '@/components/forms/CategoryForm';
+import React from 'react';
 
 export default function page() {
   return (
-    <div className="p-8">
+    <div className='p-8'>
       <CategoryForm />
     </div>
   );

@@ -1,131 +1,257 @@
-"use client";
-import React from "react";
-import Link from "next/link";
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
 import {
   Bell,
-  CircleUser,
+  DollarSign,
   ExternalLink,
+  Handshake,
   Home,
   LayoutGrid,
-  LineChart,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
+  Lock,
+  User2,
   Users,
-} from "lucide-react";
+  Mail,
+  Mails,
+  UsersRound,
+  Settings,
+  FolderKanban,
+  RectangleEllipsis,
+  Landmark,
+  FolderClock,
+  Wrench,
+  BellRing,
+  Blocks,
+} from 'lucide-react';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/card';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import Logo from '../global/logo';
+
 export default function Sidebar() {
   const sidebarLinks = [
     {
-      title: "Dashboard",
-      href: "/dashboard",
-      icon: Home,
+      title: 'Dashboard',
+      links: [
+        {
+          title: 'Overview',
+          href: '/dashboard',
+          icon: Home,
+        },
+      ],
     },
     {
-      title: "Orders",
-      href: "/dashboard/orders",
-      icon: ShoppingCart,
-      count: 6,
+      title: 'Clients & Projects',
+      links: [
+        {
+          title: 'Clients',
+          href: '/dashboard/clients',
+          icon: Users,
+        },
+        {
+          title: 'Projects',
+          href: '/dashboard/projects',
+          icon: LayoutGrid,
+        },
+      ],
     },
     {
-      title: "Products",
-      href: "/dashboard/products",
-      icon: Package,
+      title: 'Finance',
+      links: [
+        {
+          title: 'Invoices',
+          href: '/dashboard/invoices',
+          icon: DollarSign,
+        },
+        {
+          title: 'Payments',
+          href: '/dashboard/payments',
+          icon: Handshake,
+        },
+      ],
     },
     {
-      title: "Customers",
-      href: "/dashboard/customers",
-      icon: Users,
+      title: 'Team',
+      links: [
+        {
+          title: 'Members',
+          href: '/dashboard/members',
+          icon: UsersRound,
+        },
+        {
+          title: 'Roles',
+          href: '/dashboard/roles',
+          icon: Lock,
+        },
+      ],
     },
     {
-      title: "Categories",
-      href: "/dashboard/categories",
-      icon: LayoutGrid,
+      title: 'Communication',
+      links: [
+        {
+          title: 'Emails',
+          href: '/dashboard/emails',
+          icon: Mail,
+        },
+        {
+          title: 'Bulk Emails',
+          href: '/dashboard/bulk-emails',
+          icon: Mails,
+        },
+      ],
     },
     {
-      title: "Analytics",
-      href: "/dashboard/analytics",
-      icon: LineChart,
+      title: 'Portfolio',
+      links: [
+        {
+          title: 'Generate Portfolio',
+          href: '/dashboard/portfolio',
+          icon: User2,
+        },
+      ],
+    },
+    {
+      title: 'Brand',
+      links: [
+        {
+          title: 'Settings',
+          href: '/dashboard/brand-settings',
+          icon: Settings,
+        },
+        {
+          title: 'File Manager',
+          href: '/dashboard/file-manager',
+          icon: FolderKanban,
+        },
+      ],
+    },
+    {
+      title: 'Reports',
+      links: [
+        {
+          title: 'Project Progress',
+          href: '/dashboard/project-progress',
+          icon: RectangleEllipsis,
+        },
+        {
+          title: 'Financial Summary',
+          href: '/dashboard/financial-summary',
+          icon: Landmark,
+        },
+        {
+          title: 'Time Tracking',
+          href: '/dashboard/time-tracking',
+          icon: FolderClock,
+        },
+      ],
+    },
+    {
+      title: 'Settings',
+      links: [
+        {
+          title: 'Account Settings',
+          href: '/dashboard/account-settings',
+          icon: Wrench,
+        },
+        {
+          title: 'Notifications',
+          href: '/dashboard/notifications',
+          icon: BellRing,
+        },
+        {
+          title: 'Integrations',
+          href: '/dashboard/notifications',
+          icon: Blocks,
+        },
+      ],
     },
   ];
+
   const pathname = usePathname();
+
   return (
-    <div className="hidden border-r bg-muted/40 md:block">
-      <div className="flex h-full max-h-screen flex-col gap-2">
-        <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Package2 className="h-6 w-6" />
-            <span className="">Acme Inc</span>
-          </Link>
-          <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-            <Bell className="h-4 w-4" />
-            <span className="sr-only">Toggle notifications</span>
+    <div className='hidden border-r bg-muted/40 md:block'>
+      <div className='flex h-full max-h-screen flex-col gap-2'>
+        <div className='flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 mt-6'>
+          <Logo href='/dashboard' title='Next Starter Kit' />
+          <Button variant='outline' size='icon' className='ml-auto h-8 w-8'>
+            <Bell className='h-4 w-4' />
+            <span className='sr-only'>Toggle notifications</span>
           </Button>
         </div>
-        <div className="flex-1">
-          <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {sidebarLinks.map((item, i) => {
-              const Icon = item.icon;
-              const isActive = item.href === pathname;
-              return (
-                <Link
-                  key={i}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                    isActive && " bg-muted  text-primary"
-                  )}
-                >
-                  <Icon className="h-4 w-4" />
-                  {item.title}
-                  {item.count && (
-                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                      {item.count}
-                    </Badge>
-                  )}
-                </Link>
-              );
-            })}
-            <Link
-              href="/"
-              className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              )}
-            >
-              <ExternalLink className="h-4 w-4" />
-              Live Website
-            </Link>
-          </nav>
+        <div className='flex-1'>
+          <ScrollArea className='h-[650px] w-full rounded-md px-4 py-2'>
+            <nav className='grid items-start px-2 text-sm font-medium lg:px-4'>
+              {sidebarLinks.map((item, i) => {
+                return (
+                  <div className='py-1' key={i}>
+                    <h2 className='pb-1'>{item.title}</h2>
+                    {item.links.map((item, i) => {
+                      const Icon = item.icon;
+                      const isActive = item.href === pathname;
+                      return (
+                        <Link
+                          key={i}
+                          href={item.href}
+                          className={cn(
+                            'flex items-center gap-3 rounded-lg px-3 py-1.5 text-muted-foreground transition-all hover:text-primary',
+                            isActive && ' bg-muted  text-primary'
+                          )}
+                        >
+                          <Icon className='h-4 w-4' />
+                          {item.title}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+              <Link
+                href='/'
+                className={cn(
+                  'flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary'
+                )}
+              >
+                <ExternalLink className='h-4 w-4' />
+                Live Website
+              </Link>
+            </nav>
+          </ScrollArea>
         </div>
-        <div className="mt-auto p-4">
-          <Card x-chunk="dashboard-02-chunk-0">
-            <CardHeader className="p-2 pt-0 md:p-4">
+        <div className='mt-auto p-4'>
+          <Card x-chunk='dashboard-02-chunk-0'>
+            <Button size='sm' className='w-full'>
+              Logout
+            </Button>
+          </Card>
+        </div>
+        {/* <div className='mt-auto p-4'>
+          <Card x-chunk='dashboard-02-chunk-0'>
+            <CardHeader className='p-2 pt-0 md:p-4'>
               <CardTitle>Upgrade to Pro</CardTitle>
               <CardDescription>
                 Unlock all features and get unlimited access to our support
                 team.
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-              <Button size="sm" className="w-full">
+            <CardContent className='p-2 pt-0 md:p-4 md:pt-0'>
+              <Button size='sm' className='w-full'>
                 Upgrade
               </Button>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
       </div>
     </div>
   );

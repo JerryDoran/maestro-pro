@@ -1,6 +1,6 @@
-import { getCategoryById } from "@/actions/categories";
-import CategoryForm from "@/components/Forms/CategoryForm";
-import React from "react";
+import { getCategoryById } from '@/actions/categories';
+import CategoryForm from '@/components/forms/CategoryForm';
+import React from 'react';
 
 export default async function page({
   params: { id },
@@ -9,7 +9,7 @@ export default async function page({
 }) {
   const category = await getCategoryById(id);
   return (
-    <div className="p-8">
+    <div className='p-8'>
       <CategoryForm initialData={category} editingId={id} />
     </div>
   );

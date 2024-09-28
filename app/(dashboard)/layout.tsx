@@ -1,6 +1,5 @@
 import Navbar from '@/components/dashboard/navbar';
 import Sidebar from '@/components/dashboard/sidebar';
-import SidebarV2 from '@/components/dashboard/sidebar-v2';
 import { authOptions } from '@/config/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
@@ -18,7 +17,7 @@ export default async function DashboardLayout({
   return (
     <div className='grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]'>
       {/* <Sidebar /> */}
-      <SidebarV2 />
+      <Sidebar />
       <div className='flex flex-col'>
         <Navbar session={session} />
         {children}
