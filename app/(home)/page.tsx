@@ -21,7 +21,7 @@ export default async function Home() {
             enterprises, our intuitive tools help you compose, conduct, and
             complete projects with precision and grace.
           </p>
-          <CustomLinkButton title='Create your project' href='/login' />
+          <CustomLinkButton title='Get started' href='/login' />
           <div className='pt-8 pb-4 flex items-center  justify-center gap-8'>
             <div className=''>
               <AnimatedAvatars />

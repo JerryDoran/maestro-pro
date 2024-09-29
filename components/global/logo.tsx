@@ -8,10 +8,7 @@ type LogoProps = {
 };
 export default function Logo({ title, href, labelShown = true }: LogoProps) {
   return (
-    <Link
-      href={href}
-      className='-m-1.5 p-1.5 flex items-center space-x-2 dark:text-slate-900'
-    >
+    <Link href={href} className='-m-1.5 p-1.5 flex items-center space-x-2'>
       <span className='sr-only'>{title}</span>
       {/* <img
         alt=""
@@ -19,7 +16,7 @@ export default function Logo({ title, href, labelShown = true }: LogoProps) {
         className="h-8 w-auto"
       /> */}
       <FolderKanban className='h-8 w-8 text-indigo-600' />
-      <span className='font-bold text-xl'>{title}</span>
+      <span className='font-bold'>{title}</span>
     </Link>
   );
 }

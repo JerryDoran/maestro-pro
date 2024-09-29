@@ -1,5 +1,6 @@
 import OverviewCard from '@/components/dashboard/overview-card';
-import { Button } from '@/components/ui/button';
+import RecentClients from '@/components/dashboard/overview/recent-clients';
+import RecentProjects from '@/components/dashboard/overview/recent-projects';
 
 export default function Dashboard() {
   return (
@@ -9,6 +10,10 @@ export default function Dashboard() {
         <OverviewCard />
         <OverviewCard />
         <OverviewCard />
+      </div>
+      <div className='grid gap-4 md:gap-8 lg:grid-cols-2'>
+        <RecentProjects />
+        <RecentClients />
       </div>
     </main>
   );

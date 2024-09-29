@@ -2,12 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import {
   Home,
+  LayoutGrid,
   LineChart,
   Menu,
   Package,
-  Package2,
   Search,
-  ShoppingCart,
   Users,
 } from 'lucide-react';
 
@@ -28,6 +27,7 @@ import { Session } from 'next-auth';
 
 import { ModeToggle } from '@/components/mode-toggle';
 import { AvatarMenuButton } from './avatar-menu-button';
+import Logo from '@/components/global/logo';
 
 export default function Navbar({ session }: { session: Session }) {
   return (
@@ -41,50 +41,44 @@ export default function Navbar({ session }: { session: Session }) {
         </SheetTrigger>
         <SheetContent side='left' className='flex flex-col'>
           <nav className='grid gap-2 text-lg font-medium'>
+            <Logo href='/dashboard' title='Maestro Pro' />
             <Link
               href='#'
-              className='flex items-center gap-2 text-lg font-semibold'
-            >
-              <Package2 className='h-6 w-6' />
-              <span className='sr-only'>Acme Inc</span>
-            </Link>
-            <Link
-              href='#'
-              className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
+              className='flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
             >
               <Home className='h-5 w-5' />
               Dashboard
             </Link>
             <Link
               href='#'
-              className='mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground'
+              className='flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground'
             >
-              <ShoppingCart className='h-5 w-5' />
-              Orders
+              <LayoutGrid className='h-5 w-5' />
+              Projects
               <Badge className='ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full'>
                 6
               </Badge>
             </Link>
             <Link
               href='#'
-              className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
+              className='flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
             >
               <Package className='h-5 w-5' />
-              Products
+              Clients
             </Link>
             <Link
               href='#'
-              className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
+              className='flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
             >
               <Users className='h-5 w-5' />
-              Customers
+              Finance
             </Link>
             <Link
               href='#'
-              className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
+              className='flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
             >
               <LineChart className='h-5 w-5' />
-              Analytics
+              Reports
             </Link>
           </nav>
           <div className='mt-auto'>
