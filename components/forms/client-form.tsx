@@ -57,6 +57,7 @@ export default function ClientForm({
     setLoading(true);
     data.name = `${data.firstName} ${data.lastName}`;
     data.image = imageUrl;
+    data.role = 'CLIENT';
 
     try {
       const res = await createUser(data);
@@ -65,11 +66,11 @@ export default function ClientForm({
         setEmailErr(res.error);
       } else if (res.status === 200) {
         setLoading(false);
-        toast.success('Account Created successfully');
-        router.push('/login');
+        toast.success('Client created successfully');
+        router.push('/dashboard/clients');
       } else {
         setLoading(false);
-        toast.error('Something went wrong');
+        toast.error('Something went wrong!');
       }
     } catch (error) {
       setLoading(false);
