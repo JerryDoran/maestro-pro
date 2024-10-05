@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
-import SearchBar from "./SearchBar";
+import SearchBar from "./search-bar";
 import { DataTableViewOptions } from "./DataTableViewOptions";
 import { Button } from "../ui/button";
 import { ListFilter } from "lucide-react";

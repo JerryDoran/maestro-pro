@@ -1,10 +1,11 @@
 import CategoryForm from '@/components/forms/category-form';
+import ClientForm from '@/components/forms/client-form';
 import React from 'react';
 
-export default function NewCategory() {
+export default function NewClient() {
   return (
     <div className='p-8'>
-      <CategoryForm />
+      <ClientForm />
     </div>
   );
 }

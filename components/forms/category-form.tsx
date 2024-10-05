@@ -15,12 +15,12 @@ import { useForm } from 'react-hook-form';
 import { generateSlug } from '@/lib/generateSlug';
 import toast from 'react-hot-toast';
 import { Category } from '@prisma/client';
-import { CategoryProps } from '@/types/types';
-import FormHeader from './FormHeader';
-import TextInput from '../FormInputs/TextInput';
-import TextArea from '../FormInputs/TextAreaInput';
-import ImageInput from '../FormInputs/ImageInput';
-import FormFooter from './FormFooter';
+import { CategoryProps } from '@/types';
+import FormHeader from '@/components/forms/form-header';
+import TextInput from '@/components/form-inputs/text-input';
+import TextArea from '@/components/form-inputs/text-area';
+import ImageInput from '@/components/form-inputs/image-input';
+import FormFooter from '@/components/forms/form-footer';
 import { createCategory, updateCategoryById } from '@/actions/categories';
 
 export type SelectOptionProps = {
@@ -93,7 +93,6 @@ export default function CategoryForm({
   // console.log(error);
   // }
   // }
-  console.log(status);
 
   return (
     <form className='' onSubmit={handleSubmit(saveCategory)}>

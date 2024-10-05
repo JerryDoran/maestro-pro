@@ -1,9 +1,10 @@
-"use server";
+'use server';
 
-import { db } from "@/prisma/db";
-import { UserProps } from "@/types/types";
-import bcrypt from "bcrypt";
-import { revalidatePath } from "next/cache";
+import { db } from '@/prisma/db';
+import { UserProps } from '@/types';
+import bcrypt from 'bcrypt';
+import { revalidatePath } from 'next/cache';
+
 export async function createUser(data: UserProps) {
   const { email, password, firstName, lastName, name, phone, image } = data;
   try {

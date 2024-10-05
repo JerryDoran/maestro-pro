@@ -1,6 +1,6 @@
-import React from "react";
-import CloseButton from "../FormInputs/CloseButton";
-import SubmitButton from "../FormInputs/SubmitButton";
+import React from 'react';
+import CloseButton from '../form-inputs/CloseButton';
+import SubmitButton from '../form-inputs/submit-button';
 
 export default function FormFooter({
   href,
@@ -16,7 +16,7 @@ export default function FormFooter({
   parent?: string;
 }) {
   return (
-    <div className="flex items-center  gap-2 py-4 justify-between ">
+    <div className='flex items-center  gap-2 py-4 justify-between '>
       <CloseButton href={href} parent={parent} />
       <SubmitButton
         title={editingId ? `Update ${title}` : `Save ${title}`}

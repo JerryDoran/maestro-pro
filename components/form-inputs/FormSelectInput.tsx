@@ -1,8 +1,8 @@
-"use client";
-import AddNewButton from "@/components/FormInputs/AddNewButton";
-import React, { useState } from "react";
-import Select from "react-tailwindcss-select";
-import { Option, Options } from "react-tailwindcss-select/dist/components/type";
+'use client';
+import AddNewButton from '@/components/form-inputs/AddNewButton';
+import React, { useState } from 'react';
+import Select from 'react-tailwindcss-select';
+import { Option, Options } from 'react-tailwindcss-select/dist/components/type';
 type FormSelectInputProps = {
   options: Options;
   label: string;
@@ -22,16 +22,16 @@ export default function FormSelectInput({
   labelShown = true,
 }: FormSelectInputProps) {
   return (
-    <div className="">
+    <div className=''>
       {labelShown && (
-        <h2 className="pb-2 block text-sm font-medium leading-6 text-gray-900">
+        <h2 className='pb-2 block text-sm font-medium leading-6 text-gray-900'>
           Select {label}
         </h2>
       )}
-      <div className="flex items-center space-x-2">
+      <div className='flex items-center space-x-2'>
         <Select
           isSearchable
-          primaryColor="blue"
+          primaryColor='blue'
           value={option}
           onChange={(item) => setOption(item)}
           options={options}

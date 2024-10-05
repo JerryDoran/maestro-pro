@@ -1,18 +1,18 @@
 'use client';
-import { Eye, EyeOff, Headset, Loader2, Lock, Mail, User } from 'lucide-react';
+import { Headset, Loader2, Lock, Mail, User } from 'lucide-react';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { UserProps } from '@/types/types';
+import { UserProps } from '@/types';
 
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 // import { createUser } from "@/actions/users";
-import TextInput from '../FormInputs/TextInput';
-import PasswordInput from '../FormInputs/PasswordInput';
-import SubmitButton from '../FormInputs/SubmitButton';
+import TextInput from '../form-inputs/text-input';
+import PasswordInput from '../form-inputs/password-input';
+import SubmitButton from '../form-inputs/submit-button';
 import { Button } from '../ui/button';
-import { FaGithub, FaGitter, FaGoogle } from 'react-icons/fa';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { createUser } from '@/actions/users';
 import { signIn } from 'next-auth/react';
 
@@ -25,6 +25,7 @@ export default function RegisterForm() {
     formState: { errors },
     reset,
   } = useForm<UserProps>();
+
   const router = useRouter();
   async function onSubmit(data: UserProps) {
     setLoading(true);
