@@ -1,64 +1,69 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from '@/components/ui/checkbox';
 
-import DateColumn from "@/components/DataTableColumns/DateColumn";
-import ImageColumn from "@/components/DataTableColumns/ImageColumn";
-import SortableColumn from "@/components/DataTableColumns/SortableColumn";
-import { ColumnDef } from "@tanstack/react-table";
-import ActionColumn from "@/components/DataTableColumns/ActionColumn";
-import { Category } from "@prisma/client";
-export const columns: ColumnDef<Category>[] = [
+import DateColumn from '@/components/datatable-columns/date-column';
+import ImageColumn from '@/components/datatable-columns/image-column';
+import SortableColumn from '@/components/datatable-columns/sortable-column';
+import { ColumnDef } from '@tanstack/react-table';
+import ActionColumn from '@/components/datatable-columns/action-column';
+import { User } from '@prisma/client';
+export const columns: ColumnDef<User>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={
           table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        aria-label='Select all'
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        aria-label='Select row'
       />
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "title",
-    header: ({ column }) => <SortableColumn column={column} title="Title" />,
+    accessorKey: 'image',
+    header: 'Profile Image',
+    cell: ({ row }) => <ImageColumn row={row} accessorKey='image' />,
   },
   {
-    accessorKey: "imageUrl",
-    header: "Category Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
+    accessorKey: 'name',
+    header: ({ column }) => <SortableColumn column={column} title='Name' />,
+  },
+  {
+    accessorKey: 'email',
+    header: ({ column }) => <SortableColumn column={column} title='Email' />,
+  },
+  {
+    accessorKey: 'phone',
+    header: ({ column }) => <SortableColumn column={column} title='Phone' />,
   },
 
   {
-    accessorKey: "createdAt",
-    header: "Date Created",
-    cell: ({ row }) => <DateColumn row={row} accessorKey="createdAt" />,
+    accessorKey: 'createdAt',
+    header: 'Date Created',
+    cell: ({ row }) => <DateColumn row={row} accessorKey='createdAt' />,
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => {
-      const category = row.original;
+      const client = row.original;
       return (
         <ActionColumn
           row={row}
-          model="category"
-          editEndpoint={`categories/update/${category.id}`}
-          id={category.id}
+          model='client'
+          editEndpoint={`clients/update/${client.id}`}
+          id={client.id}
         />
       );
     },

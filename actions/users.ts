@@ -35,7 +35,8 @@ export async function createUser(data: UserProps) {
         role,
       },
     });
-    // revalidatePath("/dashboard/users");
+    revalidatePath('/dashboard/clients');
+    revalidatePath('/dashboard/users');
     // console.log(newUser);
     return {
       error: null,

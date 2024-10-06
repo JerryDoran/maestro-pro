@@ -5,15 +5,18 @@ import { db } from '@/prisma/db';
 import { CategoryProps } from '@/types';
 import { revalidatePath } from 'next/cache';
 
-export async function getAllCategories() {
+export async function getClients() {
   try {
-    const categories = await db.category.findMany({
+    const users = await db.user.findMany({
       orderBy: {
         createdAt: 'desc',
       },
+      where: {
+        role: 'CLIENT',
+      },
     });
 
-    return categories;
+    return users;
   } catch (error) {
     console.log(error);
     return null;

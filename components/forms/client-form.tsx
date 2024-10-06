@@ -31,6 +31,15 @@ export default function ClientForm({
   initialData,
 }: ClientFormProps) {
   const [emailErr, setEmailErr] = useState<string | null>(null);
+  const router = useRouter();
+
+  const initialImage =
+    initialData?.image ||
+    'https://utfs.io/f/59b606d1-9148-4f50-ae1c-e9d02322e834-2558r.png';
+  const [imageUrl, setImageUrl] = useState(initialImage);
+
+  const [loading, setLoading] = useState(false);
+  
   const {
     register,
     handleSubmit,
@@ -45,13 +54,6 @@ export default function ClientForm({
       email: initialData?.email || '',
     },
   });
-  const router = useRouter();
-
-  const [loading, setLoading] = useState(false);
-  const initialImage =
-    initialData?.image ||
-    'https://utfs.io/f/59b606d1-9148-4f50-ae1c-e9d02322e834-2558r.png';
-  const [imageUrl, setImageUrl] = useState(initialImage);
 
   async function onSubmit(data: UserProps) {
     setLoading(true);
