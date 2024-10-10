@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
+'use client';
+
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,11 +19,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { MoreHorizontal, Pencil, Trash } from "lucide-react";
-import { deleteCategory } from "@/actions/categories";
-import toast from "react-hot-toast";
-import Link from "next/link";
+} from '@/components/ui/alert-dialog';
+import { MoreHorizontal, Pencil, Trash } from 'lucide-react';
+import { deleteCategory } from '@/actions/categories';
+
+import toast from 'react-hot-toast';
+import Link from 'next/link';
+import { deleteUser } from '@/actions/users';
 
 type ActionColumnProps = {
   row: any;
@@ -36,32 +38,40 @@ export default function ActionColumn({
   row,
   model,
   editEndpoint,
-  id = "",
+  id = '',
 }: ActionColumnProps) {
   const isActive = row.isActive;
+
   async function handleDelete() {
     try {
-      if (model === "category") {
+      if (model === 'category') {
         const res = await deleteCategory(id);
         if (res?.ok) {
           window.location.reload();
         }
-        toast.success(`${model} Deleted Successfully`);
+        toast.success(`${model} deleted successfully!`);
+      } else if (model === 'client') {
+        const res = await deleteUser(id);
+        if (res?.ok) {
+          window.location.reload();
+        }
+        toast.success(`${model} deleted successfully!`);
       }
     } catch (error) {
       console.log(error);
       toast.error("Category Couldn't be deleted");
     }
   }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
-          <MoreHorizontal className="h-4 w-4" />
+        <Button variant='ghost' className='h-8 w-8 p-0'>
+          <span className='sr-only'>Open menu</span>
+          <MoreHorizontal className='h-4 w-4' />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align='end'>
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <AlertDialog>
@@ -70,11 +80,11 @@ export default function ActionColumn({
               
             </DropdownMenuItem> */}
             <Button
-              variant={"ghost"}
-              size={"sm"}
-              className="text-red-600 hover:text-red-700 transition-all duration-500 cursor-pointer "
+              variant={'ghost'}
+              size={'sm'}
+              className='text-red-600 hover:text-red-700 transition-all duration-500 cursor-pointer '
             >
-              <Trash className="w-4 h-4  mr-2 flex-shrink-0" />
+              <Trash className='w-4 h-4  mr-2 flex-shrink-0' />
               <span>Delete</span>
             </Button>
           </AlertDialogTrigger>
@@ -82,13 +92,13 @@ export default function ActionColumn({
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete this{" "}
+                This action cannot be undone. This will permanently delete this{' '}
                 {model}.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <Button variant={"destructive"} onClick={() => handleDelete()}>
+              <Button variant={'destructive'} onClick={() => handleDelete()}>
                 Permanently Delete
               </Button>
             </AlertDialogFooter>
@@ -102,8 +112,8 @@ export default function ActionColumn({
           <span>Delete</span>
         </DropdownMenuItem> */}
         <DropdownMenuItem>
-          <Link href={editEndpoint} className="flex item gap-2">
-            <Pencil className="w-4 h-4 " />
+          <Link href={editEndpoint} className='flex item gap-2'>
+            <Pencil className='w-4 h-4 ' />
             <span>Edit</span>
           </Link>
         </DropdownMenuItem>

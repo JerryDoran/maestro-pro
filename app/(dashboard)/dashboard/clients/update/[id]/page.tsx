@@ -1,17 +1,17 @@
-import { getCategoryById } from '@/actions/categories';
-import CategoryForm from '@/components/forms/category-form';
+import { getUserById } from '@/actions/users';
+import ClientForm from '@/components/forms/client-form';
 
 import React from 'react';
 
-export default async function UpdateCategory({
+export default async function UpdateClientPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const category = await getCategoryById(id);
+  const user = await getUserById(id);
   return (
     <div className='p-8'>
-      <CategoryForm initialData={category} editingId={id} />
+      <ClientForm initialData={user} editingId={id} />
     </div>
   );
 }

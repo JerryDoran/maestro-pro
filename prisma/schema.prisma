@@ -56,6 +56,8 @@ model User {
   email          String          @unique
   emailVerified  DateTime?
   image          String?
+  country        String?
+  location       String?
   role           UserRole        @default(USER)
   password       String?
   status         Boolean         @default(true)

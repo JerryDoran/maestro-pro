@@ -14,8 +14,16 @@ import TextInput from '@/components/form-inputs/text-input';
 import ImageInput from '@/components/form-inputs/image-input';
 import FormFooter from '@/components/forms/form-footer';
 import PasswordInput from '@/components/form-inputs/password-input';
-import { createUser } from '@/actions/users';
-import { Headset, Loader2, Mail, User as UserIcon, Lock } from 'lucide-react';
+import { createUser, updateUserById } from '@/actions/users';
+import {
+  Headset,
+  Loader2,
+  Mail,
+  User as UserIcon,
+  Lock,
+  Flag,
+  MapPin,
+} from 'lucide-react';
 import SubmitButton from '@/components/form-inputs/submit-button';
 
 export type SelectOptionProps = {
@@ -39,7 +47,7 @@ export default function ClientForm({
   const [imageUrl, setImageUrl] = useState(initialImage);
 
   const [loading, setLoading] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -52,6 +60,8 @@ export default function ClientForm({
       phone: initialData?.phone || '',
       image: initialData?.image || '',
       email: initialData?.email || '',
+      country: initialData?.country || '',
+      location: initialData?.location || '',
     },
   });
 
@@ -62,17 +72,31 @@ export default function ClientForm({
     data.role = 'CLIENT';
 
     try {
-      const res = await createUser(data);
-      if (res.status === 409) {
+      // Check for editing existing user
+      if (editingId) {
+        await updateUserById(editingId, data);
         setLoading(false);
-        setEmailErr(res.error);
-      } else if (res.status === 200) {
-        setLoading(false);
-        toast.success('Client created successfully');
+
+        toast.success('Updated client successfully!');
+
+        //reset form fields
+        reset();
+
         router.push('/dashboard/clients');
       } else {
-        setLoading(false);
-        toast.error('Something went wrong!');
+        // Creating a new user
+        const res = await createUser(data);
+        if (res.status === 409) {
+          setLoading(false);
+          setEmailErr(res.error);
+        } else if (res.status === 200) {
+          setLoading(false);
+          toast.success('Client created successfully!');
+          router.push('/dashboard/clients');
+        } else {
+          setLoading(false);
+          toast.error('Something went wrong!');
+        }
       }
     } catch (error) {
       setLoading(false);
@@ -146,6 +170,24 @@ export default function ClientForm({
                       <p className='text-red-500 text-xs mt-2'>{emailErr}</p>
                     )}
                   </div>
+                </div>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                  <TextInput
+                    register={register}
+                    errors={errors}
+                    label='Country'
+                    name='country'
+                    icon={Flag}
+                    placeholder='ex. US'
+                  />
+                  <TextInput
+                    register={register}
+                    errors={errors}
+                    label='Location'
+                    name='location'
+                    icon={MapPin}
+                    placeholder='ex. New York'
+                  />
                 </div>
 
                 {!editingId && (

@@ -13,6 +13,8 @@ export type UserProps = {
   phone: string;
   image: string;
   email: string;
+  country?: string;
+  location?: string;
   password: string;
   role?: UserRole;
 };
