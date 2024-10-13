@@ -162,7 +162,7 @@ export default function TableHeader({
     }
   }
   function handleExportData() {
-    console.log("data exported");
+    // console.log("data exported");
     const today = new Date();
     const filename = `Exported ${title} ${today.toDateString()}`;
     // console.log(filename);
