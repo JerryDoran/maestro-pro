@@ -34,12 +34,12 @@ export default function LoginForm() {
     try {
       setLoading(true);
       setPassErr('');
-      console.log('Attempting to sign in with credentials:', data);
+      // console.log('Attempting to sign in with credentials:', data);
       const loginData = await signIn('credentials', {
         ...data,
         redirect: false,
       });
-      console.log('SignIn response:', loginData);
+      // console.log('SignIn response:', loginData);
       if (loginData?.error) {
         setLoading(false);
         toast.error('Sign-in error: Check your credentials');
@@ -63,7 +63,7 @@ export default function LoginForm() {
   return (
     <div className='w-full py-5 lg:px-8 px-6 '>
       <div className=''>
-        <div className='py-4 text-gray-900'>
+        <div className='py-4 text-gray-900 dark:text-gray-200'>
           <h2 className='text-xl lg:text-2xl font-bold leading-9 tracking-tight  '>
             Login in to your account
           </h2>

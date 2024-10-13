@@ -60,6 +60,7 @@ model User {
   location       String?
   role           UserRole        @default(USER)
   password       String?
+  userId         String?         @db.ObjectId
   status         Boolean         @default(true)
   accounts       Account[]
   sessions       Session[]
