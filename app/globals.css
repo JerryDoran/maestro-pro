@@ -67,3 +67,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.select > div > div {
+  background-color: transparent;
+}
+
+.select input {
+  background-color: transparent;
+}

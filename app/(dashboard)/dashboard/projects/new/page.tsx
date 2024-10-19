@@ -1,10 +1,24 @@
-import CategoryForm from '@/components/forms/category-form';
+import { getClients } from '@/actions/clients';
+import ProjectForm from '@/components/forms/project-form';
+
+import { getAuthUser } from '@/config/get-auth-user';
 import React from 'react';
 
-export default function NewCategory() {
+export default async function NewProject() {
+  const user = await getAuthUser();
+  const userId = user?.id ?? '';
+
+  const clients = await getClients(userId);
+  const userClients =
+    clients?.map((client) => {
+      return {
+        label: client.name,
+        value: client.id,
+      };
+    }) || [];
   return (
     <div className='p-8'>
-      <CategoryForm />
+      <ProjectForm clients={userClients} userId={userId} />
     </div>
   );
 }

@@ -1,13 +1,13 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Plus } from "lucide-react";
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 type AddNewButtonProps = {
   href: string;
   toolTipText: string;
@@ -17,9 +17,14 @@ export default function AddNewButton({ href, toolTipText }: AddNewButtonProps) {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button asChild variant={"outline"} size={"sm"}>
+          <Button
+            asChild
+            variant={'outline'}
+            size={'sm'}
+            className='border border-gray-700'
+          >
             <Link href={href}>
-              <Plus className="w-4 h-4" />
+              <Plus className='w-4 h-4' />
             </Link>
           </Button>
         </TooltipTrigger>

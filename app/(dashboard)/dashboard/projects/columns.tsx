@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -10,8 +8,10 @@ import ImageColumn from '@/components/datatable-columns/image-column';
 import SortableColumn from '@/components/datatable-columns/sortable-column';
 import { ColumnDef } from '@tanstack/react-table';
 import ActionColumn from '@/components/datatable-columns/action-column';
-import { Category } from '@prisma/client';
-export const columns: ColumnDef<Category>[] = [
+import { Project } from '@prisma/client';
+import Link from 'next/link';
+
+export const columns: ColumnDef<Project>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -35,13 +35,18 @@ export const columns: ColumnDef<Category>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'title',
-    header: ({ column }) => <SortableColumn column={column} title='Title' />,
+    accessorKey: 'thumbnail',
+    header: 'Project Image',
+    cell: ({ row }) => <ImageColumn row={row} accessorKey='thumbnail' />,
   },
   {
-    accessorKey: 'imageUrl',
-    header: 'Category Image',
-    cell: ({ row }) => <ImageColumn row={row} accessorKey='imageUrl' />,
+    accessorKey: 'name',
+    header: ({ column }) => <SortableColumn column={column} title='Name' />,
+  },
+  {
+    accessorKey: 'startDate',
+    header: 'Project Start Date',
+    cell: ({ row }) => <DateColumn row={row} accessorKey='startDate' />,
   },
 
   {
@@ -50,15 +55,26 @@ export const columns: ColumnDef<Category>[] = [
     cell: ({ row }) => <DateColumn row={row} accessorKey='createdAt' />,
   },
   {
+    accessorKey: 'createdAt',
+    header: '',
+    cell: ({ row }) => {
+      return (
+        <Button size='sm' variant='outline' className='text-sm'>
+          <Link href={`/dashboard/projects/view/project-name`}>View</Link>
+        </Button>
+      );
+    },
+  },
+  {
     id: 'actions',
     cell: ({ row }) => {
-      const category = row.original;
+      const project = row.original;
       return (
         <ActionColumn
           row={row}
           model='category'
-          editEndpoint={`categories/update/${category.id}`}
-          id={category.id}
+          editEndpoint={`projects/update/${project.id}`}
+          id={project.id}
         />
       );
     },

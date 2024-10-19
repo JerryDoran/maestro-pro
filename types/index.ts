@@ -1,4 +1,4 @@
-import { UserRole } from '@prisma/client';
+import { ProjectStatus, UserRole } from '@prisma/client';
 
 export type CategoryProps = {
   title: string;
@@ -19,6 +19,21 @@ export type UserProps = {
   role?: UserRole;
   userId?: string;
 };
+
+export type ProjectProps = {
+  name: string;
+  slug: string;
+  notes?: string;
+  description?: string;
+  bannerImage?: string;
+  thumbnail?: string;
+  startDate: any;
+  endDate?: any;
+  status: ProjectStatus;
+  clientId: string;
+  userId: string;
+};
+
 export type LoginProps = {
   email: string;
   password: string;
