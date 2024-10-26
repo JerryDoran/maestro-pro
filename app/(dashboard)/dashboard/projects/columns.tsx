@@ -43,6 +43,23 @@ export const columns: ColumnDef<Project>[] = [
     accessorKey: 'name',
     header: ({ column }) => <SortableColumn column={column} title='Name' />,
   },
+
+  {
+    accessorKey: 'budget',
+    header: 'Budget',
+    cell: ({ row }) => {
+      const project = row.original;
+      return <p className=''>${project.budget?.toLocaleString()}</p>;
+    },
+  },
+  {
+    accessorKey: 'timeline',
+    header: 'Timeline',
+    cell: ({ row }) => {
+      const project = row.original;
+      return <p className='ml-2'>{project.timeline?.toString()} days</p>;
+    },
+  },
   {
     accessorKey: 'startDate',
     header: 'Project Start Date',
@@ -59,7 +76,11 @@ export const columns: ColumnDef<Project>[] = [
     header: '',
     cell: ({ row }) => {
       return (
-        <Button size='sm' variant='outline' className='text-sm'>
+        <Button
+          size='sm'
+          variant='outline'
+          className='text-xs border-neutral-600 text-neutral-300'
+        >
           <Link href={`/dashboard/projects/view/project-name`}>View</Link>
         </Button>
       );

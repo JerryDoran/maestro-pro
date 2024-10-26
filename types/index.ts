@@ -27,6 +27,8 @@ export type ProjectProps = {
   description?: string;
   bannerImage?: string;
   thumbnail?: string;
+  budget?: number;
+  timeline?: number;
   startDate: any;
   endDate?: any;
   status: ProjectStatus;

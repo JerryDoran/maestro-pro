@@ -5,12 +5,12 @@ import { getAllProjects } from '@/actions/projects';
 
 import DataTable from '@/components/datatable/data-table';
 import TableHeader from '@/components/dashboard/tables/table-header';
-import { userAgent } from 'next/server';
-import { getAuthUser } from '@/config/get-auth-user';
+
+import { useAuth } from '@/hooks/useAuth';
 
 export default async function ProjectsPage() {
-  const user = await getAuthUser();
-  const projects: Project[] = (await getAllProjects(user.id)) || [];
+  const user = await useAuth();
+  const projects: Project[] = (await getAllProjects(user?.id)) || [];
   return (
     <div className='p-8'>
       <TableHeader

@@ -16,6 +16,7 @@ export async function createProject(data: ProjectProps) {
       return {
         status: 409,
         error: `Project ${data.name} already exists!`,
+        data: null,
       };
     }
     const newProject = await db.project.create({
@@ -25,14 +26,20 @@ export async function createProject(data: ProjectProps) {
         description: data.description,
         thumbnail: data.thumbnail,
         startDate: data.startDate,
+        endDate: data.endDate,
         clientId: data.clientId,
         userId: data.userId,
+        timeline: data.timeline,
+        budget: data.budget,
       },
     });
     // console.log(newCategory);
     revalidatePath('/dashboard/projects');
-    return newProject;
-    console.log(newProject);
+    return {
+      status: 200,
+      error: null,
+      data: newProject,
+    };
   } catch (error) {
     console.log(error);
     return null;

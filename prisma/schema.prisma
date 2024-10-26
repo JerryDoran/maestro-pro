@@ -99,6 +99,8 @@ model Project {
   description String?
   bannerImage String?
   thumbnail   String?
+  budget      Int?             @default(0)
+  timeline    Int?
   startDate   DateTime         @default(now())
   endDate     DateTime?
   status      ProjectStatus    @default(ONGOING)
