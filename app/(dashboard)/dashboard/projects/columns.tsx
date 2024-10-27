@@ -93,7 +93,7 @@ export const columns: ColumnDef<Project>[] = [
       return (
         <ActionColumn
           row={row}
-          model='category'
+          model='project'
           editEndpoint={`projects/update/${project.id}`}
           id={project.id}
         />

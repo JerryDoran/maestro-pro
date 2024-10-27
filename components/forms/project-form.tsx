@@ -18,6 +18,7 @@ import ImageInput from '@/components/form-inputs/image-input';
 import FormFooter from '@/components/forms/form-footer';
 import FormSelectInput from '@/components/form-inputs/form-select-input';
 import { convertDateToIso } from '@/lib/convert-date-to-iso';
+import { convertIsoDateToString } from '@/lib/convert-date-to-string';
 
 export type SelectOptionProps = {
   label: string;
@@ -45,8 +46,8 @@ export default function ProjectForm({
       name: initialData?.name,
       description: initialData?.description || '',
       budget: initialData?.budget || 0,
-      startDate: initialData?.startDate || new Date().toLocaleDateString(),
-      endDate: initialData?.endDate || new Date().toLocaleDateString(),
+      startDate: convertIsoDateToString(initialData?.startDate) || null,
+      endDate: convertIsoDateToString(initialData?.endDate ?? '') || null,
     },
   });
   const router = useRouter();

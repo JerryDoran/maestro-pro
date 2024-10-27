@@ -77,7 +77,7 @@ export default function TableHeader({
   } else if (model === "product") {
     excelDownload = "/Products.xlsx";
   }
-  console.log(excelFile);
+  // console.log(excelFile);
   const options: Options = [
     { value: "true", label: "Active" },
     { value: "false", label: "Disabled" },
@@ -169,7 +169,7 @@ export default function TableHeader({
     exportDataToExcel(data, filename);
   }
   return (
-    <div className=" mb-3">
+    <div className="mb-3">
       <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-600 py-3">
         <h2 className="scroll-m-20  text-2xl font-semibold tracking-tight first:mt-0">
           {title}({data.length})

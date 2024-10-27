@@ -1,5 +1,7 @@
-import { getCategoryById } from '@/actions/categories';
-import CategoryForm from '@/components/forms/category-form';
+import { getClients } from '@/actions/clients';
+import { getAllProjects, getProjectById } from '@/actions/projects';
+import ProjectForm from '@/components/forms/project-form';
+import { getAuthUser } from '@/config/get-auth-user';
 
 import React from 'react';
 
@@ -8,10 +10,25 @@ export default async function UpdateCategory({
 }: {
   params: { id: string };
 }) {
-  const category = await getCategoryById(id);
+  const project = await getProjectById(id);
+  const user = await getAuthUser();
+  const userId = user?.id ?? '';
+  const clients = await getClients(userId);
+  const userClients =
+    clients?.map((client) => {
+      return {
+        label: client.name,
+        value: client.id,
+      };
+    }) || [];
   return (
     <div className='p-8'>
-      <CategoryForm initialData={category} editingId={id} />
+      <ProjectForm
+        initialData={project}
+        editingId={id}
+        clients={userClients}
+        userId={userId}
+      />
     </div>
   );
 }

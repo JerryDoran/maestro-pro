@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -26,6 +25,7 @@ import { deleteCategory } from '@/actions/categories';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { deleteUser } from '@/actions/users';
+import { deleteProject } from '@/actions/projects';
 
 type ActionColumnProps = {
   row: any;
@@ -49,17 +49,23 @@ export default function ActionColumn({
         if (res?.ok) {
           window.location.reload();
         }
-        toast.success(`${model} deleted successfully!`);
+        toast.success('Category deleted successfully!');
       } else if (model === 'client') {
         const res = await deleteUser(id);
         if (res?.ok) {
           window.location.reload();
         }
-        toast.success(`${model} deleted successfully!`);
+        toast.success('Client deleted successfully!');
+      } else if (model === 'project') {
+        const res = await deleteProject(id);
+        if (res?.ok) {
+          window.location.reload();
+        }
+        toast.success('Project deleted successfully!');
       }
     } catch (error) {
       console.log(error);
-      toast.error("Category Couldn't be deleted");
+      toast.error(`${model} could not be deleted!`);
     }
   }
 

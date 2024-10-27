@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -13,7 +13,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
 import {
   Table,
@@ -22,7 +22,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -30,16 +30,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useState } from "react";
+} from '@/components/ui/dropdown-menu';
+import { useState } from 'react';
 
-import SearchBar from "./search-bar";
-import { DataTableViewOptions } from "./DataTableViewOptions";
-import { Button } from "../ui/button";
-import { ListFilter } from "lucide-react";
-import DateFilters from "./DateFilters";
-import DateRangeFilter from "./DateRangeFilter";
-import { DataTablePagination } from "./DataTablePagination";
+import SearchBar from './search-bar';
+import { DataTableViewOptions } from './DataTableViewOptions';
+import { Button } from '../ui/button';
+import { ListFilter } from 'lucide-react';
+import DateFilters from './DateFilters';
+import DateRangeFilter from './DateRangeFilter';
+import { DataTablePagination } from './DataTablePagination';
+import ProjectStats from './project-stats';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -82,16 +83,17 @@ export default function DataTable<TData, TValue>({
   });
   // console.log(searchResults);
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center gap-8">
-        <div className="flex-1 w-full">
+    <div className='space-y-4'>
+      <ProjectStats />
+      <div className='flex justify-between items-center gap-8'>
+        <div className='flex-1 w-full'>
           <SearchBar
             data={data}
             onSearch={setSearchResults}
             setIsSearch={setIsSearch}
           />
         </div>
-        <div className="flex items-center gap-2 ">
+        <div className='flex items-center gap-2 '>
           <DateRangeFilter
             data={data}
             onFilter={setFilteredData}
@@ -104,14 +106,14 @@ export default function DataTable<TData, TValue>({
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="h-8 gap-1">
-                <ListFilter className="h-3.5 w-3.5" />
-                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+              <Button variant='outline' size='sm' className='h-8 gap-1'>
+                <ListFilter className='h-3.5 w-3.5' />
+                <span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>
                   Filter
                 </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align='end'>
               <DropdownMenuLabel>Filter by</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuCheckboxItem checked>
@@ -125,7 +127,7 @@ export default function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="rounded-md border">
+      <div className='rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -150,7 +152,7 @@ export default function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -166,7 +168,7 @@ export default function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className='h-24 text-center'
                 >
                   No results.
                 </TableCell>
