@@ -11,6 +11,7 @@ import { useAuth } from '@/hooks/useAuth';
 export default async function ProjectsPage() {
   const user = await useAuth();
   const projects: Project[] = (await getAllProjects(user?.id)) || [];
+
   return (
     <div className='p-8'>
       <TableHeader
@@ -21,7 +22,7 @@ export default async function ProjectsPage() {
         model='project'
       />
       <div className='pt-2'>
-        <DataTable data={projects} columns={columns} />
+        <DataTable model='projects' data={projects} columns={columns} />
       </div>
     </div>
   );

@@ -72,6 +72,7 @@ export async function updateProjectById(id: string, data: ProjectProps) {
       },
       data,
     });
+
     revalidatePath('/dashboard/projects');
     return updatedProject;
   } catch (error) {

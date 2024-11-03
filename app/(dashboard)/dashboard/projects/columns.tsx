@@ -72,16 +72,18 @@ export const columns: ColumnDef<Project>[] = [
     cell: ({ row }) => <DateColumn row={row} accessorKey='createdAt' />,
   },
   {
-    accessorKey: 'createdAt',
+    // accessorKey: 'createdAt',
+    id: 'view',
     header: '',
     cell: ({ row }) => {
+      const project = row.original;
       return (
         <Button
           size='sm'
           variant='outline'
           className='text-xs border-neutral-600 text-neutral-300'
         >
-          <Link href={`/dashboard/projects/view/project-name`}>View</Link>
+          <Link href={`/dashboard/projects/view/${project.slug}`}>View</Link>
         </Button>
       );
     },

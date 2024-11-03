@@ -46,8 +46,8 @@ export default function ProjectForm({
       name: initialData?.name,
       description: initialData?.description || '',
       budget: initialData?.budget || 0,
-      startDate: convertIsoDateToString(initialData?.startDate) || null,
-      endDate: convertIsoDateToString(initialData?.endDate ?? '') || null,
+      startDate: convertIsoDateToString(initialData?.startDate ?? undefined),
+      endDate: convertIsoDateToString(initialData?.endDate ?? undefined),
     },
   });
   const router = useRouter();

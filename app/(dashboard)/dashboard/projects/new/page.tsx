@@ -2,7 +2,6 @@ import { getClients } from '@/actions/clients';
 import ProjectForm from '@/components/forms/project-form';
 
 import { getAuthUser } from '@/config/get-auth-user';
-import React from 'react';
 
 export default async function NewProject() {
   const user = await getAuthUser();
