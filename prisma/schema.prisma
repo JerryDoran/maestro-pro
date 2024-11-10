@@ -48,30 +48,32 @@ enum UserRole {
 }
 
 model User {
-  id             String          @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  firstName      String
-  lastName       String
-  phone          String
-  email          String          @unique
-  emailVerified  DateTime?
-  image          String?
-  country        String?
-  location       String?
-  role           UserRole        @default(USER)
-  password       String?
-  userId         String?         @db.ObjectId
-  status         Boolean         @default(true)
-  accounts       Account[]
-  sessions       Session[]
-  projects       Project[]
-  invoices       Invoice[]
-  payments       Payment[]
-  portfolioItems PortfolioItem[]
-  isVerfied      Boolean         @default(false)
-  token          Int?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  id                 String          @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  firstName          String
+  lastName           String
+  phone              String
+  email              String          @unique
+  emailVerified      DateTime?
+  image              String?
+  country            String?
+  location           String?
+  role               UserRole        @default(USER)
+  password           String?
+  companyName        String?
+  companyDescription String?
+  userId             String?         @db.ObjectId
+  status             Boolean         @default(true)
+  accounts           Account[]
+  sessions           Session[]
+  projects           Project[]
+  invoices           Invoice[]
+  payments           Payment[]
+  portfolioItems     PortfolioItem[]
+  isVerfied          Boolean         @default(false)
+  token              Int?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 }
 
 model Category {
@@ -110,6 +112,7 @@ model Project {
   modules     Module[]
   members     Member[]
   invoices    Invoice[]
+  payments    Payment[]
   comments    ProjectComment[]
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
@@ -177,7 +180,9 @@ model Payment {
   date      DateTime
   method    String
   user      User     @relation(fields: [userId], references: [id])
+  project   Project  @relation(fields: [projectId], references: [id])
   userId    String   @db.ObjectId
+  projectId String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

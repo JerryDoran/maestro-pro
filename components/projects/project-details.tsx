@@ -30,10 +30,12 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useRouter } from 'next/navigation';
 
 export default function ProjectDetails() {
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const router = useRouter();
 
   const moduleCategories = [
     {
@@ -80,7 +82,7 @@ export default function ProjectDetails() {
             variant='ghost'
             size='icon'
             className='absolute top-4 left-4 text-gray-200 hover:text-white hover:bg-gray-800/50'
-            onClick={() => console.log('Navigate back to all projects')}
+            onClick={() => router.push('/dashboard/projects')}
           >
             <ArrowLeft className='h-6 w-6' />
           </Button>

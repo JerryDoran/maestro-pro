@@ -79,6 +79,7 @@ export async function updateProjectById(id: string, data: ProjectProps) {
     console.log(error);
   }
 }
+
 export async function getProjectById(id: string) {
   try {
     const project = await db.project.findUnique({
@@ -91,6 +92,27 @@ export async function getProjectById(id: string) {
     console.log(error);
   }
 }
+
+export async function getProjectDetailsBySlug(slug: string) {
+  try {
+    // clientId
+    const project = await db.project.findUnique({
+      where: {
+        slug,
+      },
+      include: {
+        modules: true,
+        members: true,
+        invoices: true,
+        comments: true,
+      },
+    });
+    return project;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function deleteProject(id: string) {
   try {
     const deletedProject = await db.project.delete({

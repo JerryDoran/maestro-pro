@@ -17,6 +17,8 @@ export async function createUser(data: UserProps) {
     role,
     country,
     location,
+    companyName,
+    companyDescription,
     userId,
   } = data;
   try {
@@ -46,12 +48,14 @@ export async function createUser(data: UserProps) {
         role,
         country,
         location,
+        companyName,
+        companyDescription,
         userId,
       },
     });
     revalidatePath('/dashboard/clients');
     revalidatePath('/dashboard/users');
-    // console.log(newUser);
+    console.log('NEW USER: ', newUser);
     return {
       error: null,
       status: 200,

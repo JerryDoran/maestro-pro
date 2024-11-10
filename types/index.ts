@@ -6,6 +6,7 @@ export type CategoryProps = {
   imageUrl: string;
   description: string;
 };
+
 export type UserProps = {
   name: string;
   firstName: string;
@@ -18,6 +19,8 @@ export type UserProps = {
   password: string;
   role?: UserRole;
   userId?: string;
+  companyName?: string;
+  companyDescription?: string;
 };
 
 export type ProjectProps = {

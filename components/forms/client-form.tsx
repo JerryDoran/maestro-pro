@@ -25,6 +25,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import SubmitButton from '@/components/form-inputs/submit-button';
+import TextArea from '../form-inputs/text-area';
 
 // export type SelectOptionProps = {
 //   label: string;
@@ -65,6 +66,8 @@ export default function ClientForm({
       email: initialData?.email || '',
       country: initialData?.country || '',
       location: initialData?.location || '',
+      companyName: initialData?.companyName || '',
+      companyDescription: initialData?.companyDescription || '',
     },
   });
 
@@ -182,7 +185,7 @@ export default function ClientForm({
                     label='Country'
                     name='country'
                     icon={Flag}
-                    placeholder='ex. US'
+                    placeholder='e.g. US'
                   />
                   <TextInput
                     register={register}
@@ -190,9 +193,23 @@ export default function ClientForm({
                     label='Location'
                     name='location'
                     icon={MapPin}
-                    placeholder='ex. New York'
+                    placeholder='e.g. New York'
                   />
                 </div>
+                <TextInput
+                  register={register}
+                  errors={errors}
+                  label='Company Name'
+                  name='companyName'
+                  placeholder='e.g. Acme Corp'
+                />
+                <TextArea
+                  register={register}
+                  errors={errors}
+                  label='Company Description'
+                  name='companyDescription'
+                  placeholder='Describe what client does...'
+                />
 
                 {!editingId && (
                   <PasswordInput

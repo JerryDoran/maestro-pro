@@ -1,8 +1,0 @@
-<Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 left-4 text-gray-200 hover:text-white hover:bg-gray-800/50"
-          onClick={() => console.log('Navigate back to all projects')}
-        >
-          <ArrowLeft className="h-6 w-6" />
-        </Button>
