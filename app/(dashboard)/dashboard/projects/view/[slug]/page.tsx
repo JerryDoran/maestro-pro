@@ -1,9 +1,21 @@
+import { getProjectDetailsBySlug } from '@/actions/projects';
 import ProjectDetails from '@/components/projects/project-details';
+import { notFound } from 'next/navigation';
 
-export default function ProjectDetailsPage() {
+export default async function ProjectDetailsPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const projectData = await getProjectDetailsBySlug(params.slug);
+  console.log(projectData);
+
+  if (!projectData) {
+    notFound();
+  }
   return (
     <>
-      <ProjectDetails />
+      <ProjectDetails project={projectData} />
     </>
   );
 }

@@ -1,7 +1,8 @@
 'use server';
 
 import { db } from '@/prisma/db';
-import { ProjectProps } from '@/types';
+import { ProjectData, ProjectProps } from '@/types';
+import { ProjectStatus, Task, UserRole } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
 export async function createProject(data: ProjectProps) {
@@ -93,21 +94,95 @@ export async function getProjectById(id: string) {
   }
 }
 
-export async function getProjectDetailsBySlug(slug: string) {
+export async function getProjectDetailsBySlug(
+  slug: string
+): Promise<ProjectData | undefined> {
   try {
     // clientId
     const project = await db.project.findUnique({
-      where: {
-        slug,
-      },
+      where: { slug },
       include: {
-        modules: true,
+        modules: {
+          include: {
+            tasks: true,
+          },
+        },
         members: true,
         invoices: true,
         comments: true,
+        payments: true,
       },
     });
-    return project;
+    if (!project) return undefined;
+
+    const client = await db.user.findFirst({
+      where: {
+        id: project.clientId,
+        role: UserRole.CLIENT,
+      },
+      select: {
+        id: true,
+        name: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        email: true,
+        image: true,
+        country: true,
+        location: true,
+        role: true,
+        companyName: true,
+        companyDescription: true,
+      },
+    });
+
+    if (!client) {
+      throw new Error('Client not found!');
+    }
+
+    const projectData: ProjectData = {
+      ...project,
+      notes: project.notes ?? undefined,
+      description: project.description ?? undefined,
+      bannerImage: project.bannerImage ?? undefined,
+      thumbnail: project.thumbnail ?? undefined,
+      budget: project.budget ?? undefined,
+      timeline: project.timeline ?? undefined,
+      endDate: project.endDate ?? undefined,
+      client,
+      modules: project.modules.map((module) => ({
+        ...module,
+        tasks: module.tasks.map((task) => ({
+          id: task.id,
+          description: task.description,
+          status: task.status,
+          createdAt: task.createdAt,
+          updatedAt: task.updatedAt,
+          title: task.title,
+          dueDate: task.dueDate,
+          moduleId: task.moduleId,
+        })),
+        invoices: project.invoices.map((invoice) => ({
+          id: invoice.id,
+          invoiceNumber: invoice.invoiceNumber,
+          amount: invoice.amount,
+          status: invoice.status,
+          dueDate: invoice.dueDate,
+        })),
+        payments: project.payments.map((payment) => ({
+          id: payment.id,
+          amount: payment.amount,
+          date: payment.date,
+          method: payment.method,
+        })),
+        comments: project.comments.map((comment) => ({
+          id: comment.id,
+          content: comment.content,
+          createdAt: comment.createdAt,
+        })),
+      })),
+    };
+    return projectData;
   } catch (error) {
     console.log(error);
   }
