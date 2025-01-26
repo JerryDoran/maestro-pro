@@ -81,6 +81,7 @@ export async function updateProjectById(id: string, data: ProjectProps) {
   }
 }
 
+
 export async function getProjectById(id: string) {
   try {
     const project = await db.project.findUnique({

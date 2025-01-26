@@ -8,7 +8,6 @@ export default async function ProjectDetailsPage({
   params: { slug: string };
 }) {
   const projectData = await getProjectDetailsBySlug(params.slug);
-  console.log(projectData);
 
   if (!projectData) {
     notFound();

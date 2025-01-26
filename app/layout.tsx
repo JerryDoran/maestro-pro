@@ -44,7 +44,27 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Providers>
-            <Toaster position='top-center' reverseOrder={false} />
+            <Toaster
+              position='top-center'
+              reverseOrder={false}
+              toastOptions={{
+                style: {
+                  background: '#222',
+                  color: '#fff',
+                  border: '1px solid #666',
+                },
+                success: {
+                  style: {
+                    background: '#006400',
+                  },
+                },
+                error: {
+                  style: {
+                    background: '#730303',
+                  },
+                },
+              }}
+            />
             {/* <PostHogPageView /> */}
             {children}
           </Providers>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Calendar,
   Clock,
@@ -10,6 +10,8 @@ import {
   Users,
   ChevronRight,
   ArrowLeft,
+  FolderPlus,
+  Plus,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -32,6 +34,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useRouter } from 'next/navigation';
 import { ProjectData } from '@/types';
+import DescriptionForm from '../forms/description-form';
+import NotesForm from '../forms/notes-form';
 
 const fakeModules = [
   {
@@ -89,6 +93,7 @@ const fakeModules = [
 export default function ProjectDetails({ project }: { project: ProjectData }) {
   const [isEditing, setIsEditing] = useState(false);
   const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [isEditingNotes, setIsEditingNotes] = useState(false);
   const router = useRouter();
 
   if (!project) {
@@ -158,9 +163,10 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
               </CardHeader>
               <CardContent>
                 {isEditingDescription ? (
-                  <Textarea
-                    className='min-h-[100px] bg-gray-700 text-gray-100 border-gray-600'
-                    defaultValue={project.description || ''}
+                  <DescriptionForm
+                    editingId={project.id}
+                    initialDescription={project.description}
+                    setIsEditingDescription={setIsEditingDescription}
                   />
                 ) : (
                   <p className='text-gray-300'>
@@ -177,17 +183,17 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
                 <Button
                   variant='ghost'
                   size='icon'
-                  onClick={() => setIsEditing(!isEditing)}
+                  onClick={() => setIsEditingNotes(!isEditingNotes)}
                 >
                   <Edit2 className='h-4 w-4 text-gray-300' />
                 </Button>
               </CardHeader>
               <CardContent>
-                {isEditing ? (
-                  <Textarea
-                    className='min-h-[100px] bg-gray-700 text-gray-100 border-gray-600'
-                    defaultValue={project.notes || ''}
-                    placeholder='Edit your notes here...'
+                {isEditingNotes ? (
+                  <NotesForm
+                    editingId={project.id}
+                    initialNotes={project.notes}
+                    setIsEditingNotes={setIsEditingNotes}
                   />
                 ) : (
                   <p className='text-gray-300'>
@@ -221,7 +227,7 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
               <CardFooter>
                 <Button
                   variant='outline'
-                  className='w-full text-gray-200 border-gray-600 hover:bg-gray-700'
+                  className='w-full text-gray-800 dark:text-gray-200 border-gray-600 hover:bg-gray-700'
                 >
                   <MessageSquare className='mr-2 h-4 w-4' /> Add Comment
                 </Button>
@@ -267,7 +273,12 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
                 <div className='h-full flex items-center justify-center'>
                   <div className='space-y-4'>
                     <h2>No modules yet</h2>
-                    <Button>Add Module</Button>
+                    <Button
+                      variant='outline'
+                      className='dark:text-gray-200 text-gray-800'
+                    >
+                      <FolderPlus className='mr-2 h-4 w-4' /> Add Module
+                    </Button>
                   </div>
                 </div>
               )}
@@ -412,25 +423,31 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
                 <CardTitle className='text-gray-100'>Team Members</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className='flex -space-x-2 overflow-hidden'>
-                  {project.members.slice(0, 5).map((member, index) => (
-                    <Avatar
-                      key={member.id}
-                      className='inline-block border-2 border-gray-800'
-                    >
-                      <AvatarImage
-                        src={`/placeholder-avatar-${index + 1}.jpg`}
-                      />
-                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  ))}
+                <div className='flex -space-x-2 overflow-hidden flex-col'>
+                  <div className='flex gap-2'>
+                    <Users className='h-4 w-4 text-gray-200' />
+                    <span className='text-sm text-gray-200'>Members:</span>
+                  </div>
+                  {project.members.length > 0 ? (
+                    project.members.map((member, index: number) => (
+                      <Avatar
+                        key={member.id}
+                        className='inline-block border-2 border-gray-800'
+                      >
+                        <AvatarImage
+                          src={`/placeholder-avatar-${index + 1}.jpg`}
+                        />
+                        <AvatarFallback>
+                          {member.name.substring(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    ))
+                  ) : (
+                    <button className='mt-2 flex items-center text-blue-400 hover:text-blue-300 text-xs p-2'>
+                      <Plus className='mr-1 h-4 w-4' /> Invite Members
+                    </button>
+                  )}
                 </div>
-                <Button
-                  variant='link'
-                  className='mt-2 text-blue-400 hover:text-blue-300'
-                >
-                  <Users className='mr-2 h-4 w-4' /> View All Members
-                </Button>
               </CardContent>
             </Card>
 
@@ -458,6 +475,37 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value='invoices' className='mt-4 space-y-4'>
+                    {project.invoices.length > 0 ? (
+                      project.invoices.map((invoice, index) => (
+                        <div
+                          key={invoice.id}
+                          className='flex justify-between items-center'
+                        >
+                          <div>
+                            <p className='font-medium text-gray-200'>
+                              Invoice #{index + 1}
+                            </p>
+                            <p className='text-sm text-gray-400'>
+                              {invoice.invoiceNumber}
+                            </p>
+                          </div>
+                          <div className='flex items-center space-x-2'>
+                            <span className='font-bold text-gray-200'>
+                              ${invoice.amount.toLocaleString()}
+                            </span>
+                            <Button
+                              variant='secondary'
+                              size='sm'
+                              className='bg-gray-700 text-gray-200 hover:bg-gray-600'
+                            >
+                              View <ChevronRight className='ml-2 h-4 w-4' />
+                            </Button>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <p className='text-gray-400 text-sm'>No invoices yet</p>
+                    )}
                     {project.invoices.map((invoice, index) => (
                       <div
                         key={invoice.id}
@@ -487,33 +535,37 @@ export default function ProjectDetails({ project }: { project: ProjectData }) {
                     ))}
                   </TabsContent>
                   <TabsContent value='payments' className='mt-4 space-y-4'>
-                    {project.payments.map((payment, index) => (
-                      <div
-                        key={payment.id}
-                        className='flex justify-between items-center'
-                      >
-                        <div>
-                          <p className='font-medium text-gray-200'>
-                            Payment #{index + 1}
-                          </p>
-                          <p className='text-sm text-gray-400'>
-                            {new Date(payment.date).toLocaleDateString()}
-                          </p>
+                    {project.payments.length > 0 ? (
+                      project.payments.map((payment, index) => (
+                        <div
+                          key={payment.id}
+                          className='flex justify-between items-center'
+                        >
+                          <div>
+                            <p className='font-medium text-gray-200'>
+                              Payment #{index + 1}
+                            </p>
+                            <p className='text-sm text-gray-400'>
+                              {new Date(payment.date).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <div className='flex items-center space-x-2'>
+                            <span className='font-bold text-gray-200'>
+                              ${payment.amount.toLocaleString()}
+                            </span>
+                            <Button
+                              variant='secondary'
+                              size='sm'
+                              className='bg-gray-700 text-gray-200 hover:bg-gray-600'
+                            >
+                              View <ChevronRight className='ml-2 h-4 w-4' />
+                            </Button>
+                          </div>
                         </div>
-                        <div className='flex items-center space-x-2'>
-                          <span className='font-bold text-gray-200'>
-                            ${payment.amount.toLocaleString()}
-                          </span>
-                          <Button
-                            variant='secondary'
-                            size='sm'
-                            className='bg-gray-700 text-gray-200 hover:bg-gray-600'
-                          >
-                            View <ChevronRight className='ml-2 h-4 w-4' />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className='text-gray-400 text-sm'>No payments yet</p>
+                    )}
                   </TabsContent>
                 </Tabs>
                 <Button
